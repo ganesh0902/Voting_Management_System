@@ -46,11 +46,14 @@ $(document).ready(function () {
 		
 		alert(" user has already voted");
 		return false;
-	});
-	
-	function myFun()
-	{
-		alert("");
-		window.history.forward();
-	}
+	});	
 })
+
+function logout()
+	{
+		//window.history.forward();
+	}
+	
+	//setTimeout("logout()",0);
+	
+	//window.onunload=function(){null};

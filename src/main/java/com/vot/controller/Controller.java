@@ -2,7 +2,6 @@ package com.vot.controller;
 
 import java.util.List;
 
-import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.vot.entities.Candidate;
 import com.vot.entities.List_of_vote;
 import com.vot.entities.User;
 import com.vot.serviceimpl.ServiceImpl;
@@ -25,7 +23,7 @@ public class Controller {
 
 	@Autowired
 	private ServiceImpl service;
-	
+		
 	@GetMapping("/login")
 	public String loginPage()
 	{
@@ -65,22 +63,35 @@ public class Controller {
 			
 			return "homePage";
 		}				
-	}
-
-	@GetMapping("/register")
+	}			
+	@GetMapping("/register")	
 	public String Register()
 	{		
 		
 		return "registration";
-	}	
-	@PostMapping("/save")
-	public String Save(@ModelAttribute User user)
-	{				
-		service.save(user);
-		return "redirect:/vote/login";
-	}	
+	}		
+	@PostMapping("/save")	
+	public String Save(@ModelAttribute User user,Model model,HttpSession session)
+	{					
+		User userexistOrNot = service.checkEmailIdAlredyExistOrNot(user.getEmail());
+		
+		if(userexistOrNot==null)
+		{
+			service.save(user);
+			System.out.println("Record save");
+			session.setAttribute("error","");
+			return "redirect:/vote/login";			
+		}		
+		else
+		{	System.out.println("Record not save");
+		
+		session.setAttribute("error","Email Alredy Exist in database ");
+			return "redirect:/vote/register";
+		}
+		
+	}		
 	@ResponseBody
-	@PostMapping("/addVote")
+	@PostMapping("/addVote")	
 	public String addVote(@RequestParam("candidateId") String candidateId,@RequestParam("userId") String userId)
 	{
 		
@@ -102,15 +113,13 @@ public class Controller {
 	public String adminLogOut()
 	{		
 		return "login";
-	}		
-	@GetMapping("/addrecords")
+	}			
+	@GetMapping("/addrecords")	
 	public String addrecords(Model model)
 	{		
 		//List<List_of_vote> listOfVote = service.listOfVote();
 		
-		List<List_of_vote> listOfVotes = service.listOfVotes();
-		
-		System.out.println("Number of Votes is "+listOfVotes);
+		List<List_of_vote> listOfVotes = service.listOfVotes();				
 		model.addAttribute("records", listOfVotes);
 				
 		return "AllRecords";

@@ -1,7 +1,5 @@
 package com.vot.entities;
 
-import java.util.Collection;
-
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,13 +19,15 @@ public class User{
 		private String email;
 		private String phone;
 		private boolean status;
-		private long candidateId;
+		private long candidateId;		
 		
 		public User() {
 			super();
 			// TODO Auto-generated constructor stub
-		}
-		public User(long uId, String username, String password, String email, String phone, boolean status,long candidateId) {
+		}		
+		
+		public User(long uId, String username, String password, String email, String phone, boolean status,
+				long candidateId) {
 			super();
 			this.uId = uId;
 			this.username = username;
@@ -35,8 +35,9 @@ public class User{
 			this.email = email;
 			this.phone = phone;
 			this.status = status;
-			this.candidateId=candidateId;
+			this.candidateId = candidateId;			
 		}
+	
 		public long getuId() {
 			return uId;
 		}
@@ -79,9 +80,11 @@ public class User{
 		public void setCandidateId(long candidateId) {
 			this.candidateId = candidateId;
 		}
+
 		@Override
 		public String toString() {
 			return "User [uId=" + uId + ", username=" + username + ", password=" + password + ", email=" + email
-					+ ", phone=" + phone + ", status=" + status + ", candidateId=" + candidateId + "]";
+					+ ", phone=" + phone + ", status=" + status + ", candidateId=" + candidateId + ", roles=" 
+					+ "]";
 		}					
 }

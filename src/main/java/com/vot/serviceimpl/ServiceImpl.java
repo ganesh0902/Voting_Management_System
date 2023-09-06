@@ -1,6 +1,7 @@
 package com.vot.serviceimpl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,9 +66,11 @@ public class ServiceImpl implements ServiceDao{
 	@Override
 	public User updateStatus(Long userId, Long candidateId) {
 		// TODO Auto-generated method stub
-		
+				
 		Optional<User> user = userRepo.findById(userId);
 		Optional<Candidate> candidate = candidateRepo.findById(candidateId);
+		
+		System.out.println("Votes");
 		
 		if(user.isPresent())
 		{
@@ -75,6 +78,7 @@ public class ServiceImpl implements ServiceDao{
 			user.get().setCandidateId(candidateId);
 			userRepo.save(user.get());
 			
+			System.out.println("Votes");
 			if(candidate.isPresent())
 			{
 				int number_of_vote = candidate.get().getNumber_of_vote();
@@ -151,20 +155,45 @@ public class ServiceImpl implements ServiceDao{
 				
 		List<User> users = userRepo.findAll();
 		
-		List<List_of_vote> list=new ArrayList<>();		
+		List<List_of_vote> list=new ArrayList<>();
+		
+	
+		
+		System.out.println(" Users"+users);
+		
+		//System.out.println(" CID"+candidateRepo.findById(502l));
+		
+		//Iterator<User> iterator = users.iterator();
+		
+//		while(iterator.hasNext())
+//		{
+//			User next = iterator.next();
+//			
+//			Optional<Candidate> findById = candidateRepo.findById(next.getCandidateId());
+//			
+//			Candidate candidate = findById.get();
+//			
+//		}
+		
 		try
 		{
 		for (User user : users) {
-			
-			Candidate candidate = candidateRepo.findById(user.getCandidateId()).get();			
 						
-			list.add(new List_of_vote(user.getuId(),user.getUsername(),user.getEmail(),user.getPhone(),candidate.getUsername()));
-									
+			System.out.println(" CID "+user.getCandidateId());
+			
+			Candidate candidate = candidateRepo.findById(user.getCandidateId()).get();
+			
+			System.out.println(" CandIs "+candidateRepo.findById(user.getCandidateId()).get());
+						
+			//System.out.println("cand"+candidate);
+			list.add(new List_of_vote(user.getuId(),user.getUsername(),user.getEmail(),user.getPhone(),candidate.getUsername()));									
+			
 		}
 		}
 		catch (Exception e) {
 			System.out.println(e);
 		}
+		System.out.println(list);
 		return list;
 	}	
 }
