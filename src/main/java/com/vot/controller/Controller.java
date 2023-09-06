@@ -110,8 +110,10 @@ public class Controller {
 		return "login";
 	}	
 	@GetMapping("/adminLogout")
-	public String adminLogOut()
+	public String adminLogOut(HttpSession session)
 	{		
+		session.removeAttribute("username");
+		session.removeAttribute("message");
 		return "login";
 	}			
 	@GetMapping("/addrecords")	

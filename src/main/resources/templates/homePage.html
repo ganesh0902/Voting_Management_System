@@ -35,11 +35,11 @@
 					<div class="my-3 ml-5" th:if="${status}">
 						
 						<button class="btn btn-primary px-5 mt-3" id="submit" type="submit"> Vote</button>
-						<a class="btn btn-danger px-5 mt-3" href="/vote/logout"> Log Out </a>
+						<a class="btn btn-danger px-5 mt-3" href="/vote/logout" onclick="userlogout()"> Log Out </a>
 					</div>
 					<div class="my-3 ml-5" th:unless="${status}">						
-						<button class="btn btn-primary px-5 mt-3" id="sub" type="submit"> Vote</button>
-						<a class="btn btn-danger px-5 mt-3" href="/vote/logout" onclick="logout()"> Log Out </a>						
+						<button class="btn btn-primary px-5 mt-3" id="sub" type="submit"> Vote</button>						
+						<a class="btn btn-danger px-5 mt-3" href="/vote/logout" id="logoutButton"> Log Out </a>												 					
 					</div>
 				</div>
 				</form>				

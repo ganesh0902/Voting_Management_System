@@ -11,8 +11,12 @@ $(document).ready(function () {
 		
 		$("#cid").val(candidateId);
 		
-	});
+	});		
 	
+	$("#goback").click(function(){
+		
+		window.history.back();
+	});
 	$("#sub").click(function(e){
 				
 		if(candidateId!="")
@@ -41,6 +45,10 @@ $(document).ready(function () {
 		return false;
 	});
 	
+	$("#userlogout").click(function(){
+		
+		alert("====")
+	});
 	
 	$("#submit").click(function(){
 		
@@ -49,11 +57,7 @@ $(document).ready(function () {
 	});	
 })
 
-function logout()
-	{
-		//window.history.forward();
-	}
 	
-	//setTimeout("logout()",0);
 	
-	//window.onunload=function(){null};
+
+	
