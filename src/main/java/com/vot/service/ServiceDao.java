@@ -15,9 +15,11 @@ public interface ServiceDao {
 	public String checkUsernameAndPassword(String email,String password);
 	public List<User> getAllUser();
 	public List<Candidate> getAll();
-	public void saveCandidate(Candidate candidate);
+	public Candidate saveCandidate(Candidate candidate);
 	public User updateStatus(Long userId,Long candidateId);
 	public boolean checkuserStatus(Long userId);
 	public String checkAdminAuthentication(String email,String password);
 	public List<List_of_vote> listOfVotes();
+	public String passwordEncoder(String plainPassword);
+		
 }

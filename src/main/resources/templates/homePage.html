@@ -7,7 +7,8 @@
  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script type="text/javascript" th:src="@{/javaScript/Candidate.js}"></script>
+	<script type="text/javascript" th:src="@{/javaScript/Candidate.js}"></script>
+	<link th:href="@{/style/homePage.css}" rel="stylesheet" type="text/css" />
 
 </head>
 <body style="background-color: #FF6969">
@@ -16,7 +17,8 @@
 			<div class="col-12">
 				<div class="bg-dark text-white py-3 pl-2">
 					<label> Welcome to Voting Application Mr </label>
-					<label th:text="${session.get('username')}"> </label>
+					<!-- <label th:text="${session.get('username')}"> </label> -->
+					<label th:text="${username}"> </label>
 				</div>
 			</div>
 		</div>
@@ -24,22 +26,34 @@
 			<div class="col-6">
 			<form action="#" method="post">
 				<div class="card">					
-					<div class="card-body">										
-						<div th:each="candidate:${candidates}">
-							<input type="radio" name="userId"  class="vt" th:id="${candidate.cid}">
-							<label  th:text="${candidate.username}" th:id="${candidate.cid}" class="ml-3"> </label>
-							<input type="hidden" name="cId"  id="cid">
-							<input type="hidden" name="uId" th:value="${userId}" id="uid">							
-						</div>						
-					</div>
+					<div class="card-body">		
+																					
+					<div class="grid-container" th:each="candidate:${candidates}">
+										
+  						<div><input type="radio" name="userId"  class="vt" th:id="${candidate.cid}">
+  							<label  th:text="${candidate.username}" th:id="${candidate.cid}" class="ml-3"> </label>
+  						</div>
+  						<div>
+  							<input type="hidden" name="cId"  id="cid">
+							<input type="hidden" name="uId" th:value="${userId}" id="uid">
+							<label th:text="${candidate.number_of_vote}">  </label>
+  						</div>
+  						<!-- image context -->
+  						<div> 
+  							<img th:src="@{'image/'+${candidate.fileName}}" alt="Your Image" class="images"/>
+  						</div>
+					</div>	
+																										
+					</div> 					
 					<div class="my-3 ml-5" th:if="${status}">
 						
 						<button class="btn btn-primary px-5 mt-3" id="submit" type="submit"> Vote</button>
-						<a class="btn btn-danger px-5 mt-3" href="/vote/logout" onclick="userlogout()"> Log Out </a>
+						<a class="btn btn-danger px-5 mt-3" href="/vote/logout" onclick="userlogout()"> Log Out </a>												
+						
 					</div>
 					<div class="my-3 ml-5" th:unless="${status}">						
 						<button class="btn btn-primary px-5 mt-3" id="sub" type="submit"> Vote</button>						
-						<a class="btn btn-danger px-5 mt-3" href="/vote/logout" id="logoutButton"> Log Out </a>												 					
+						<a class="btn btn-danger px-5 mt-3" href="/vote/logout" id="logoutButton"> Log Out </a>																		 				
 					</div>
 				</div>
 				</form>				

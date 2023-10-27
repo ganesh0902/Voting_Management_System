@@ -1,0 +1,51 @@
+#small-box {
+    width: 200px; /* Set the width of the container */
+    height: 150px; /* Set the height of the container */
+    
+    
+    
+}
+.container {
+    display: flex;
+    justify-content: space-between; /* Adjust as needed */
+    align-items: center; 
+    border: 2px solid gray;
+    margin-top: 3px;
+}
+.box {
+    /* display: inline-block;
+    width: 48%; Adjust the width as needed
+    margin: 5px;
+    border: 1px solid #ccc; Optional styling */
+    /*  width: 48%; Adjust the width as needed */
+    margin-top: 4px;
+    margin-bottom: 4px; 
+}
+
+.images{
+	 width: 150px; /* Set the width to 200 pixels */
+    height: 70px; /* Set the height to 150 pixels */
+}
+.grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* Creates three equal-width columns */
+      gap: 10px; /* Adjust the gap between columns */
+      margin-bottom: 3%;
+  }
+  
+ .card-body{
+ 
+   background-color: #f7f7f7;
+   border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+   }
+   
+   .card-body label{      
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+   } 

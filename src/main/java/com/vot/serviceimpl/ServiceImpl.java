@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.vot.entities.Candidate;
 import com.vot.entities.List_of_vote;
 import com.vot.entities.User;
+import com.vot.password.PasswordEncoder;
 import com.vot.repository.CandidateRepository;
 import com.vot.repository.UserRepository;
 import com.vot.service.ServiceDao;
@@ -25,8 +27,12 @@ public class ServiceImpl implements ServiceDao{
 	private CandidateRepository candidateRepo;
 		
 	@Override
-	public User save(User user) {
-				
+	public User save(User user) {						
+		
+		String encode = PasswordEncoder.encode(user.getPassword());
+		
+		user.setPassword(encode);
+		
 		return userRepo.save(user);
 	}
 
@@ -51,16 +57,20 @@ public class ServiceImpl implements ServiceDao{
 	@Override
 	public User checkPasswordAlredyExistOrNot(String password) {
 		// TODO Auto-generated method stub
+		
+		
+		
 		return userRepo.findByPassword(password);
 	}
 
 	@Override
-	public void saveCandidate(Candidate candidate) {
+	public Candidate saveCandidate(Candidate candidate) {
 				
 		System.out.println("Record save successfully");
 		
-		candidateRepo.save(candidate);
+		Candidate save = candidateRepo.save(candidate);
 		
+		return save;
 	}
 
 	@Override
@@ -69,9 +79,7 @@ public class ServiceImpl implements ServiceDao{
 				
 		Optional<User> user = userRepo.findById(userId);
 		Optional<Candidate> candidate = candidateRepo.findById(candidateId);
-		
-		System.out.println("Votes");
-		
+						
 		if(user.isPresent())
 		{
 			user.get().setStatus(true);
@@ -115,14 +123,19 @@ public class ServiceImpl implements ServiceDao{
 			
 			if(findByEmail!=null)
 			{
-				if(!findByEmail.getPassword().equals(password))
-				{
+				
+				String password2 = findByEmail.getPassword();
+				
+				System.out.println(PasswordEncoder.matches(password,password2));								
+				
+				if(!PasswordEncoder.matches(password,findByEmail.getPassword()))
+				{														
 					meesage="Password is wrong";
 				}				
 			}
 			else
 			{				
-				meesage="Invali Email";
+				meesage="Invalid Email";
 			}
 		}
 		catch(Exception e)
@@ -135,10 +148,15 @@ public class ServiceImpl implements ServiceDao{
 	public String checkAdminAuthentication(String email, String password) {
 		
 		String message="";
-		if(email.equals("ganeshs2987@gmail.com"))
+		
+		String passwordEncoder = PasswordEncoder.encode("admin123");
+		
+		System.out.println("Email Id is "+email+" "+passwordEncoder);
+		
+		if(email.equals("admin123@gmail.com"))
 		{
 			message="validEmail";
-			if(password.equals("ganesh123"))
+			if(PasswordEncoder.matches(password, passwordEncoder))
 			{
 				message="login";
 			}
@@ -157,43 +175,25 @@ public class ServiceImpl implements ServiceDao{
 		
 		List<List_of_vote> list=new ArrayList<>();
 		
-	
-		
-		System.out.println(" Users"+users);
-		
-		//System.out.println(" CID"+candidateRepo.findById(502l));
-		
-		//Iterator<User> iterator = users.iterator();
-		
-//		while(iterator.hasNext())
-//		{
-//			User next = iterator.next();
-//			
-//			Optional<Candidate> findById = candidateRepo.findById(next.getCandidateId());
-//			
-//			Candidate candidate = findById.get();
-//			
-//		}
-		
 		try
 		{
 		for (User user : users) {
-						
-			System.out.println(" CID "+user.getCandidateId());
-			
-			Candidate candidate = candidateRepo.findById(user.getCandidateId()).get();
-			
-			System.out.println(" CandIs "+candidateRepo.findById(user.getCandidateId()).get());
-						
-			//System.out.println("cand"+candidate);
-			list.add(new List_of_vote(user.getuId(),user.getUsername(),user.getEmail(),user.getPhone(),candidate.getUsername()));									
-			
+												
+			Candidate candidate = candidateRepo.findById(user.getCandidateId()).get();											
+			list.add(new List_of_vote(user.getuId(),user.getUsername(),user.getEmail(),user.getPhone(),candidate.getUsername()));												
 		}
 		}
 		catch (Exception e) {
 			System.out.println(e);
-		}
-		System.out.println(list);
+		}		
 		return list;
+	}
+
+	@Override
+	public String passwordEncoder(String plainPassword) {
+		
+		
+		
+		return null;
 	}	
 }

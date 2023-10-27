@@ -8,8 +8,7 @@ $(document).ready(function () {
 		let phone=$("#phone").val();
 		
 		let msg=$("#error").val();
-		
-				alert(msg);
+						
 		console.log(phone.length);		
 		
 		let found=true;

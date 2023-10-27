@@ -8,6 +8,8 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript" th:src="@{/javaScript/Candidate.js}"></script>
+ <link th:href="@{/style/admin.css}" rel="stylesheet" type="text/css" />
+
 </head>
 <body style="background-color: #E67E22">
 	<div class="">
@@ -17,10 +19,15 @@
 					<div class="col-6 text-white">
 						<h4> Voting App </h4>
 					</div>
-					<div class="col-6">
-						<form action="">
-						<a class="btn btn-primary mr-2 float-right px-5" href="/vote/addrecords"> List Of All vote </a>
-						<a href="/vote/adminLogout" class="btn btn-danger float-right px-5" onclick="logout()"> Logout </a>
+					<div class="col-6" id="list">
+						<form action="" method="get">
+						<!-- <a class="btn btn-primary mr-2 float-right px-5" href="/vote/addrecords"> List Of All vote </a>
+						<a href="/vote/adminLogout" class="btn btn-danger float-right px-5" onclick="logout()"> Logout </a> -->
+						<ul>
+							<li> <a href="/vote/adminLogout" class="btn btn-danger" onclick="logout()"> Logout </a> </li>
+							<li> <a href="/vote/addrecords" class="btn btn-primary"> List Of All vote </a></li>
+							<li> <a href="/vote/addAdmin" class="btn btn-primary">Add Candidate</a> </li>
+						</ul>						
 						</form>
 					</div>
 				</div>

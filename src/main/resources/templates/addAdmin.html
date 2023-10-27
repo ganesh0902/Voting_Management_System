@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Add Admin </title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+	<div class="">		
+	<form action="/vote/saveCandidate" method="post" enctype="multipart/form-data">
+		<div class="row bg-dark p-3 text-white">
+			<div class="col-12">
+				<div>
+					<h4> Add New Candidate </h4>
+				</div>
+			</div>		
+		</div>
+		<div class="jumbotron">
+		<div class="row justify-content-center">		
+			<div class="col-5">
+				<div class="card">
+					<div class="card-body">
+						<div>
+							<label>Enter User Name </label><br/>
+							<input type="text" name="username" class="form-control">							
+						</div>
+						<div class="pt-2">
+							<label>Enter city Name </label><br/>
+							<input type="text" name="city" class="form-control">							
+						</div>
+						<div class="pt-2">
+							<label>Enter Contact </label><br/>
+							<input type="text" name="contact" class="form-control">							
+						</div>
+						<div class="pt-2">
+							<label>Enter Income </label><br/>
+							<input type="text" name="income" class="form-control">							
+						</div>
+						<div class="pt-2">
+							<input type="file" name="file" >						
+						</div>
+						<div class="pt-3">
+							<button class="btn btn-primary form-control"> Submit </button>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		</form>
+	</div>	
+</body>
+</html>
